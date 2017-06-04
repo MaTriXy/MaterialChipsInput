@@ -80,10 +80,12 @@ public class LetterTileProvider {
      *         default image is shown instead
      */
     public Bitmap getLetterTile(String displayName) {
-        if(displayName.length() == 0)
+        // workaround
+        if(displayName == null || displayName.length() == 0)
             return null;
 
         final Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+
         final char firstChar = displayName.charAt(0);
 
         final Canvas c = mCanvas;
@@ -96,7 +98,8 @@ public class LetterTileProvider {
             mPaint.getTextBounds(mFirstChar, 0, 1, mBounds);
             c.drawText(mFirstChar, 0, 1, mWidth / 2, mHeight / 2
                     + (mBounds.bottom - mBounds.top) / 2, mPaint);
-        } else {
+        }
+        else {
             // (32 - 24) / 2 = 4
             c.drawBitmap(mDefaultBitmap, ViewUtil.dpToPx(4), ViewUtil.dpToPx(4), null);
         }
@@ -110,6 +113,10 @@ public class LetterTileProvider {
      *         default image is shown instead
      */
     public Bitmap getCircularLetterTile(String displayName) {
+        // workaround
+        if(displayName == null || displayName.length() == 0)
+            displayName = ".";
+
         final Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
         final char firstChar = displayName.charAt(0);
 

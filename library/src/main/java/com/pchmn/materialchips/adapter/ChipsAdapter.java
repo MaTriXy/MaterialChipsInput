@@ -140,7 +140,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 if(event.getAction() == KeyEvent.ACTION_DOWN
                         && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
                     // remove last chip
-                    if(mChipList.size() > 0)
+                    if(mChipList.size() > 0 && mEditText.getText().toString().length() == 0)
                         removeChip(mChipList.size() - 1);
                 }
                 return false;
@@ -370,7 +370,6 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private boolean listContains(List<ChipInterface> contactList, ChipInterface chip) {
-        Log.e(TAG, mChipsInput.getChipValidator() == null ? "null": "not null");
 
         if(mChipsInput.getChipValidator() != null) {
             for(ChipInterface item: contactList) {
